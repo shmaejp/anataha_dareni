@@ -1,0 +1,1 @@
+web: gunicorn anataha_dareni_project.wsgi

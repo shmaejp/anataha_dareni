@@ -1,0 +1,13 @@
+{% extends 'send_image_app/base.html' %}
+{% block content %}
+<div class="container">
+    <h4 class="label">結果：{% if y == 0 %}クマ{% elif y == 1 %}ネコ{% elif y == 2 %}イヌ{% else %}ゾウ{% endif %}です。</h4>
+    <h4 class="proba">信頼度は{{ y_proba }}％です。</h4>
+    <p>
+        <img class="prob_img" src="{{ image_url }}" alt="">
+    </p>
+    <a href="/">
+        <button class="btn btn-primary" type="button" name="imageupload">画像選択メニューに戻る</button>
+    </a>    
+</div>
+{% endblock %}
