@@ -33,17 +33,17 @@ def image_upload(request):
             model.save() # データをDBに保存
 
             # 推論結果をHTMLに渡す
-            return render(request, 'send_image_app/classify.html', {'y':y[0], 'y_proba':y_proba[0], 'image_url':image_url})
+            return render(request, 'anataha_dareni/classify.html', {'y':y[0], 'y_proba':y_proba[0], 'image_url':image_url})
     else:
         form = ImageForm()
-        return render(request, 'send_image_app/index.html', {'form':form})
+        return render(request, 'anataha_dareni/index.html', {'form':form})
 
 def inference(image_url):
     # ネットワークの準備
     net = Net().cpu().eval()
 
     # 重みの読み込み
-    net.load_state_dict(torch.load('model/send_image.pt', map_location=torch.device('cpu')))
+    net.load_state_dict(torch.load('model/anataha_dareni(DenseNet-169).pt', map_location=torch.device('cpu')))
 
     image = Image.open(image_url)
     image = image.resize((224, 224))
@@ -72,11 +72,11 @@ def inference(image_url):
 
 class Login(LoginView):
     from_class = LoginForm
-    template_name = 'send_image_app/login.html'
+    template_name = 'anataha_dareni/login.html'
 
 # ログアウトページ
 class Logout(LogoutView):
-    template_name = 'send_image_app/base.html'
+    template_name = 'anataha_dareni/base.html'
 
 def signup(request):
     if request.method == 'POST':
@@ -99,4 +99,4 @@ def signup(request):
     # POST で送信がなかった場合の処理
     else:
         form = SignUpForm()
-        return render(request, 'send_image_app/signup.html', {'form': form})
+        return render(request, 'anataha_dareni/signup.html', {'form': form})
