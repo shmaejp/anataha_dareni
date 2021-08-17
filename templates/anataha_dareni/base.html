@@ -2,12 +2,12 @@
 <html lang="ja" dir="ltr">
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <title>{% block title %}画像分類アプリ{% endblock %}</title>
+        <title>{% block title %}あなたは誰似？アプリ{% endblock %}</title>
     </head>
 
     <body>
         <nav class="navbar navbar-light" style="background-color: #00b9f1;">
-            <span class="navbar-brand mb-0 h1">画像分類アプリ</span>
+            <span class="navbar-brand mb-0 h1">あなたは誰似？アプリ</span>
             <!-- ログアウト機能の追加 -->
             {% if user.is_authenticated %}
             <span style="font-size:15px; text-align: right;">
@@ -19,7 +19,7 @@
             {% endif %}
         </nav>
         <nav class="navbar navbar-light" style="background-color: #00b9f1;">
-            <span style="color:white">クマ、ネコ、イヌ、ゾウ（４値分類）</span>
+            <span style="color:white">有名人（２０人）</span>
         </nav>
 
         <div class="contents" style="margin:0 20px">
