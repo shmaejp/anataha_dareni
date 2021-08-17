@@ -7,4 +7,5 @@ db.sqlite3
 .DS_Store
 actor_images
 haarcascades
+media
 old_images
