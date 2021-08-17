@@ -1,7 +1,29 @@
 {% extends 'anataha_dareni/base.html' %}
 {% block content %}
 <div class="container">
-    <h4 class="label">結果：{% if y == 0 %}クマ{% elif y == 1 %}ネコ{% elif y == 2 %}イヌ{% else %}ゾウ{% endif %}です。</h4>
+    <h4 class="label">結果：
+        {% if y == 0 %}阿部寛
+        {% elif y == 1 %}イチロー
+        {% elif y == 2 %}木村拓哉
+        {% elif y == 3 %}堺正章
+        {% elif y == 4 %}田中圭
+        {% elif y == 5 %}中居正広
+        {% elif y == 6 %}ダルビッシュ有
+        {% elif y == 7 %}福山雅治
+        {% elif y == 8 %}三浦翔平
+        {% elif y == 9 %}横浜流星
+        {% elif y == 10 %}新垣結衣
+        {% elif y == 11 %}綾瀬はるか
+        {% elif y == 12 %}有村架純
+        {% elif y == 13 %}石原さとみ
+        {% elif y == 14 %}北川景子
+        {% elif y == 15 %}戸田恵梨香
+        {% elif y == 16 %}二階堂ふみ
+        {% elif y == 17 %}橋本環奈
+        {% elif y == 18 %}浜辺美波
+        {% elif y == 19 %}広瀬すず
+        {% else %}該当者なし{% endif %}です。
+    </h4>
     <h4 class="proba">信頼度は{{ y_proba }}％です。</h4>
     <p>
         <img class="prob_img" src="{{ image_url }}" alt="">
