@@ -5,3 +5,6 @@ djangovenv
 db.sqlite3
 /static
 .DS_Store
+actor_images
+haarcascades
+old_images
