@@ -9,6 +9,7 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = ModelFile
         fields = ('image',)
+        exclude = ('id',)
 
 # ログインフォーム
 class LoginForm(AuthenticationForm):

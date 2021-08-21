@@ -1,8 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.utils.data as data
-from torchvision.models import resnet18
+# import torch.utils.data as data
+# from torchvision.models import resnet18
 from torchvision.models import densenet169
 
 # class TrainNet(pl.LightningModule):
@@ -45,9 +45,9 @@ from torchvision.models import densenet169
 #         results =  {'val_loss': avg_loss, 'val_acc': avg_acc}
 #         return results
 
-class Net():
+class Net(nn.Module):
 
-    def __init__(self, hidden_size=50, output_size=50, batch_size=10, lr=0.1):
+    def __init__(self, hidden_size=50, output_size=20, batch_size=10, lr=0.1):
         super().__init__()
         self.lr = lr
         # self.feature = resnet18(pretrained=True)  # ResNet-18 を特徴抽出機として使用
