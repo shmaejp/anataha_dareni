@@ -29,7 +29,13 @@ def image_upload(request):
             # 推論処理後に、推論結果（ラベル）と信頼度（確率）を DB に格納する
             model = ModelFile.objects.order_by('id').reverse()[0]   # ModelFileの切り出し
             model.label = y[0]    # 推論結果（ラベル）
-            model.proba = y_proba[0]    # 信頼度（確率）
+
+            # 信頼度（確率）
+            if y_proba >= 0:
+                model.proba = y_proba[0]
+            else:
+                model.proba = 0.0
+            
             # print('y[0]:', y[0])
             # print('y_proba[0]:', y_proba[0])
             model.save() # データをDBに保存
@@ -38,6 +44,7 @@ def image_upload(request):
             # return render(request, 'anataha_dareni/classify.html', {'y':y[0], 'y_proba':y_proba[0], 'image_url':image_url})
             return render(request, 'anataha_dareni/classify.html', {'y':y[0], 'y_proba':y_proba[0]})
         else:
+            form = ImageForm()
             return render(request, 'anataha_dareni/index.html', {'form':form})
     else:
         form = ImageForm()
@@ -48,7 +55,7 @@ def inference(image_url):
     net = Net().cpu().eval()
 
     # 重みの読み込み
-    net.load_state_dict(torch.load('model/anataha_dareni(DenseNet-169).pt', map_location=torch.device('cpu')), strict=False)
+    net.load_state_dict(torch.load('model/anataha_dareni.pt', map_location=torch.device('cpu')), strict=False)
 
     #画像ファイルの読み込み
     img = cv2.imread(image_url)
@@ -82,7 +89,7 @@ def inference(image_url):
         # print(type(x))
         y = net(data.float().unsqueeze(0))
         y = F.softmax(y)
-        print(y)
+        # print(y)
         y_proba, y = y.topk(1, dim=1)
         
         # 予測ラベル
@@ -91,11 +98,14 @@ def inference(image_url):
         # 信頼度
         y_proba = y_proba.view(-1).to('cpu').detach().numpy()
         y_proba = np.round(y_proba * 100, 1)
-        print('y:', y)
-        print('y_proba:', y_proba)
+        # print('y:', y)
+        # print('y_proba:', y_proba)
         return y, y_proba
     else:
-        print("顔が検出されませんでした。")
+        # print("顔が検出されませんでした。")
+        y = np.array([10])
+        y_proba = np.array([-1.0])
+        return y, y_proba
 
 class Login(LoginView):
     from_class = LoginForm
@@ -122,7 +132,8 @@ def signup(request):
                 # ログイン後のリダイレクト処理
                 return redirect('imageupload')
         else:
-            print('form is not valid.')
+            form = SignUpForm()
+            return render(request, 'anataha_dareni/signup.html', {'form': form})
     # POST で送信がなかった場合の処理
     else:
         form = SignUpForm()

@@ -47,7 +47,7 @@ from torchvision.models import densenet169
 
 class Net(nn.Module):
 
-    def __init__(self, hidden_size=50, output_size=20, batch_size=10, lr=0.1):
+    def __init__(self, hidden_size=50, output_size=10, batch_size=10, lr=0.1):
         super().__init__()
         self.lr = lr
         # self.feature = resnet18(pretrained=True)  # ResNet-18 を特徴抽出機として使用
